@@ -11,10 +11,9 @@ jobs:
       uses: actions/checkout@master
     
     - name: Docker
-      run:
-        - echo docker build -t newscrawlers .
-        - echo docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
-        - echo docker push newscrawlers
+      run: echo docker build -t newscrawlers .
+      run: echo docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+      run: echo docker push newscrawlers
 
     - name: Deploy file to Server
       uses: wlixcc/SFTP-Deploy-Action@v1.0
