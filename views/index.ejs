@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mondo | News</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+  <header>
+    <img class="logo" src="/logo.png" alt="Mondo News">
+    <h1> Mondo News </h1>
+    <time class="time"> <%= time %> </time>
+  </header>
+  <section>
+    <ul>
+      <% list.forEach(function(news) { %>
+      <li class="news">
+        <a class="title" href="<%= news.href %>" target="_blank">
+          <h3>
+            <%= news.title %>
+            <% if (news.hot) {%>
+            <img class="hot" src="/hot.svg" />
+            <%}%>
+            </h3>
+          </a>
+          <div class="tag"><%= news.tag %></div>
+      </li>
+      <%})%>
+    </ul>
+  </section>
+</body>
+
+</html>

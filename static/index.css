@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: rgba(0,0,0,.65);
+}
+
+a {
+  color: #1a202c;
+}
+
+header {
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 64px;
+  white-space: nowrap;
+  background: #fff;
+  box-shadow: 0 8px 24px -2px rgba(0,0,0,.05);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+header > h1 {
+  flex: 1;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.logo {
+  width: 2rem;
+}
+
+.time {
+  font-size: 0.6rem;
+  color: #1a202c;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 90px 0 40px 0;
+}
+
+.news {
+  padding: 20px 20px 10px 20px;
+  border-bottom: 1px solid rgba(178,186,194,.15);
+  list-style: none;
+}
+
+.tag {
+  margin-top: 10px;
+  font-size: .5rem;
+  line-height: 1;
+  white-space: nowrap;
+  color: #b2bac2;
+}
+
+.title {
+  line-height: 1.625;
+  font-family:  -apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.title h3:hover {
+  text-decoration: underline;
+}
+.title h3 {
+  display: inline-block;
+  font-weight: 400;
+}
+.hot {
+  display: inline-block;
+}

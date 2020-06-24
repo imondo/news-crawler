@@ -1,0 +1,10 @@
+[{
+  "name": "Mondo News",
+  "script": "./app.js",
+  "env_dev": {
+    "NODE_ENV": "development"
+  },
+  "env_production": {
+    "NODE_ENV": "production"
+  }
+}]

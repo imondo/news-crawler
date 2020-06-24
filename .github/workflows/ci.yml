@@ -1,0 +1,21 @@
+name: Mondo News action
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Deploy file to Server
+      uses: wlixcc/SFTP-Deploy-Action@v1.0
+      with:  
+        username: 'root'
+        server: '${{ secrets.SERVER_IP }}'
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        local_path: './*' 
+        remote_path: '/front/news'
+        script: bash /front/news/deploy.sh
