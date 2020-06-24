@@ -11,9 +11,10 @@ jobs:
       uses: actions/checkout@master
     
     - name: Docker
-      run: echo docker build -t newscrawlers .
-      run: echo docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
-      run: echo docker push newscrawlers
+      run: |
+        docker build -t newscrawlers .
+        docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+        docker push newscrawlers
 
     - name: Deploy file to Server
       uses: wlixcc/SFTP-Deploy-Action@v1.0
@@ -23,4 +24,5 @@ jobs:
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         local_path: './deploy.sh' 
         remote_path: '/front/news'
-        run: echo bash /front/news/deploy.sh
+        run: |
+          bash /front/news/deploy.sh
