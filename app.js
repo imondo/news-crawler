@@ -32,7 +32,7 @@ app.use(async ctx => {
 });
 
 
-app.listen(4000, () => {
+app.listen(5080, () => {
   console.log('开始监听')
   timeJob(function() {
     crawler.cnNews()

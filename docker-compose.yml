@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  news-crawler:
+    image: news-crawler
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 5000
