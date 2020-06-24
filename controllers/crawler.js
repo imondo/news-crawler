@@ -83,7 +83,7 @@ class Creeper {
             title: title,
             href: `${url}${href}`,
             hot,
-            tag: '社会'
+            tag: '民生'
           });
         }
       });

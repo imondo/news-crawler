@@ -1,3 +1,1 @@
-cd /front/news
-docker build -t newscrawlers .
-docker run -d -p 5080:5080 newscrawlers
+pm2 start pm2.json
