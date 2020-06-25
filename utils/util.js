@@ -13,10 +13,10 @@ module.exports = {
       const date = this.getNowDate();
       fs.readFile(path.join( __dirname,  `../database/${date}.json`), (err, data) => {
         if (err) {
-          console.log(err);
           reject(err);
+        } else {
+          resolve(JSON.parse(data.toString()).data);
         }
-        resolve(data.toString());
       })
     })
   }

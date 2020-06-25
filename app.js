@@ -23,10 +23,10 @@ app.use(views(
 ))
 
 app.use(async ctx => {
-  const newsList = await utils.readJsonFile();
-  const list = JSON.parse(newsList);
+  const newsList = await utils.readJsonFile().catch(() => crawler.cnNews());
+  const list = newsList;
   await ctx.render('index', {
-    list: list.data,
+    list,
     time: utils.getNowDate()
   })
 });
