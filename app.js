@@ -5,6 +5,7 @@ const views = require('koa-views');
 const utils = require('./utils/util');
 const timeJob = require('./utils/timeJob');
 const CrawlerCtr = require('./controllers/crawler');
+const config = require('./config');
 
 const app = new Koa();
 
@@ -23,7 +24,7 @@ app.use(views(
 ))
 
 app.use(async ctx => {
-  const newsList = await utils.readJsonFile().catch(() => crawler.cnNews());
+  const newsList = await utils.readJsonFile().catch((error) => error);
   const list = newsList;
   await ctx.render('index', {
     list,
@@ -32,8 +33,8 @@ app.use(async ctx => {
 });
 
 
-app.listen(5080, () => {
-  console.log('开始监听')
+app.listen(config.port, () => {
+  console.log('开始监听' + config.port)
   timeJob(function() {
     crawler.cnNews()
   })
