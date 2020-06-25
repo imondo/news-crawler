@@ -103,9 +103,15 @@ class Creeper {
     const news_163 = this.get163List();
     const news_people = this.getPeopleList();
     const news_society = this.getSocietyList();
-    const list = await Promise.all([news_163, news_people, news_society]);
+    const [news_163_list, news_people_list, news_society_list] = await Promise.all([
+      news_163,
+      news_people,
+      news_society,
+    ]);
     const filesName = utils.getNowDate();
-    const newsList = this.sortHotNews(list.flat(Infinity));
+    const newsList = this.sortHotNews(
+      news_163_list.concat(news_people_list, news_society_list)
+    );
     write(`${filesName}`, newsList);
     return newsList;
   }
