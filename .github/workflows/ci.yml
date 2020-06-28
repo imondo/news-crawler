@@ -25,4 +25,4 @@ jobs:
         local_path: './*' 
         remote_path: '/front/news'
         run: |
-          sh /front/news/deploy.sh
+          sh ./deploy.sh
