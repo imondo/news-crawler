@@ -1,20 +1,22 @@
-name: Mondo News action
+name: Mondo News action # 名称
 on:
   push:
     branches:
-      - master
+      - master # 只在 master 上 push 操作触发部署
+    paths-ignore:  # 下列文件的变更不触发部署，可以自行添加
+      - README.md    
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@master
+    runs-on: ubuntu-latest # 使用 ubuntu 系统镜像运行自动化脚本
+    steps: # 自动化步骤
+    - name: Checkout  # 步骤名称
+      uses: actions/checkout@master # 使用别人包装好的步骤镜像
     - name: Deploy file to Server
       uses: wlixcc/SFTP-Deploy-Action@v1.0
       with:  
-        username: ${{ secrets.USERNAME }}
-        server: '${{ secrets.SERVER_IP }}'
-        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        username: ${{ secrets.USERNAME }} # 引用配置，用户名称
+        server: ${{ secrets.SERVER_IP }} # 引用配置，服务器 IP
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # 引用配置，SSH 私钥
         local_path: './*' 
         remote_path: '/front/news'
     - name: Server Start    
@@ -24,4 +26,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.PORT }}
-        script: sh /front/news/deploy.sh
+        script: sh /front/news/deploy.sh # 执行脚本命令
