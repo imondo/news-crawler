@@ -24,4 +24,5 @@ jobs:
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         local_path: './*' 
         remote_path: '/front/news'
-      run: sh ./deploy.sh
+    - name: Server Start    
+      run: ssh root@${{ secrets.SERVER_IP }} "sh ./deploy.sh"
