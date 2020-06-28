@@ -1,8 +1,10 @@
 module.exports = {
+  NODE_EN: process.argv[process.argv.length - 1],
   port: 5080,
-  timeJob: { 
-    hour: 6,
-    minute: 0,
-    second: 0
-  } // 定时任务，每天 6 点执行一次任务; 注意: 这里需要加 minute: 0， 否则10点的每一分钟都执行一次。
+  timeJob: [1, 5, 9, 13, 17, 21]  // 定时任务，每隔 4 小时执行一次任务
+  // { 
+  //   hour: 6,
+  //   minute: 0,
+  //   second: 0
+  // }
 }

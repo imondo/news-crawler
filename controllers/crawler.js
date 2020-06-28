@@ -92,6 +92,34 @@ class Creeper {
     return newsList;
   }
 
+  // 智慧长沙
+  async getZHCSNews() {
+    return new Promise(resolve => {
+      const url = `https://h5.zhcs.csbtv.com/api/app/v1/home/queryModuleByColumnId?columnId=000000000000000002&pageSize=25`;
+      request.get({url}, function(err, res, body) {
+        if (err) {
+          console.log(err);
+          resolve([]);
+        }
+        const { data = [] } = JSON.parse(body);
+        const list = data.reduce((arr, v) => {
+          if (v.data && ![2, 4].includes(v.moduleType)) {
+            v.data.forEach(o => {
+              arr.push({
+                title: o.newsTitle,
+                href: o.detailsUrl,
+                hot: +v.moduleType === 11, 
+                tag: o.newsSrc
+              })  
+            });
+          }
+          return arr;
+        }, []);
+        resolve(list);
+      });
+    })
+  }
+
   sortHotNews(data) {
     data.sort((a, b) => {
       return b.hot - a.hot
@@ -114,6 +142,19 @@ class Creeper {
     );
     write(`${filesName}`, newsList);
     return newsList;
+  }
+
+  async getNews() {
+    try {
+      let list = await utils.readJsonFile().catch((error) => error);
+      if (!list) {
+        list = await this.cnNews();
+      }
+      const csNews = await this.getZHCSNews();
+      return this.sortHotNews(csNews.concat(list));
+    } catch (error) {
+      return [];
+    }
   }
 }
 

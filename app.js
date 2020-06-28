@@ -24,8 +24,7 @@ app.use(views(
 ))
 
 app.use(async ctx => {
-  const newsList = await utils.readJsonFile().catch((error) => error);
-  const list = newsList;
+  let list = await crawler.getNews();
   await ctx.render('index', {
     list,
     time: utils.getNowDate()
@@ -36,6 +35,6 @@ app.use(async ctx => {
 app.listen(config.port, () => {
   console.log('开始监听' + config.port)
   timeJob(function() {
-    crawler.cnNews()
+    crawler.cnNews();
   })
 });

@@ -27,11 +27,30 @@
             <%}%>
             </h3>
           </a>
-          <div class="tag"><%= news.tag %></div>
+          <div class="tag">
+            <%= news.tag %>
+          </div>
       </li>
       <%})%>
     </ul>
   </section>
+  <div class="top" id="top">
+    <img src="/top.svg" alt="置顶">
+  </div>
+  <script>
+    var $top = document.querySelector('#top');
+    window.addEventListener('scroll', function(e) {
+      var sTop = document.body.scrollTop || document.documentElement.scrollTop;
+      if(+sTop > 600){
+        $top.style.opacity = 1;
+      }else {
+        $top.style.opacity = 0;
+      }
+    })
+    $top.addEventListener('click', function() {
+      window.scrollTo(0, 0);
+    })
+  </script>
 </body>
 
 </html>

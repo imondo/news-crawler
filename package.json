@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "node app.js dev",
+    "build": "node app.js pord",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
