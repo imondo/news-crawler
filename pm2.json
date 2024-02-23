@@ -1,6 +1,6 @@
 [{
   "name": "Mondo News",
-  "script": "yarn build",
+  "script": "npm run build",
   "env_dev": {
     "NODE_ENV": "development"
   },
