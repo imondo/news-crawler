@@ -12,7 +12,7 @@ class Creeper {
         if (err) {
           console.log(err);
         }
-        let html =  iconv.decode(body, 'gbk');
+        let html =  iconv.decode(body, 'utf-8');
         let $ = cheerio.load(html, {decodeEntities: false});
         resolve($);
       });
@@ -98,24 +98,29 @@ class Creeper {
       const url = `https://h5.zhcs.csbtv.com/api/app/v1/home/queryModuleByColumnId?columnId=000000000000000002&pageSize=25`;
       request.get({url}, function(err, res, body) {
         if (err) {
-          console.log(err);
+          resolve([]);
+          return;
+        }
+        try {
+          const { data = [] } = JSON.parse(body);
+          const list = data.reduce((arr, v) => {
+            if (v.data && ![2, 4].includes(v.moduleType)) {
+              v.data.forEach(o => {
+                arr.push({
+                  title: o.newsTitle,
+                  href: o.detailsUrl,
+                  hot: +v.moduleType === 11, 
+                  tag: o.newsSrc
+                })  
+              });
+            }
+            return arr;
+          }, []);
+          resolve(list);
+        } catch (error) {
+          console.log(error);
           resolve([]);
         }
-        const { data = [] } = JSON.parse(body);
-        const list = data.reduce((arr, v) => {
-          if (v.data && ![2, 4].includes(v.moduleType)) {
-            v.data.forEach(o => {
-              arr.push({
-                title: o.newsTitle,
-                href: o.detailsUrl,
-                hot: +v.moduleType === 11, 
-                tag: o.newsSrc
-              })  
-            });
-          }
-          return arr;
-        }, []);
-        resolve(list);
       });
     })
   }
